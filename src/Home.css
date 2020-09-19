@@ -1,0 +1,33 @@
+#header{
+	text-align: center;
+	font-size: 75px;
+	background-color: #cbf3f0;
+	color: #2ec4b6;
+}
+
+
+
+/*----------------------Poll---------------------*/
+
+#polls{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.poll{
+	margin: 8px;
+	background-color: #ffffff;
+	height: 256px;
+	width: 256px;
+	cursor: pointer;
+}
+.poll-head{
+	text-align: center;
+}
+.poll-desc{
+
+}
+hr{
+	text-align: center;
+	width: 50%;
+}
