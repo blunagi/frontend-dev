@@ -4,10 +4,19 @@ body{
 	margin: 0px;
 	background-color: #ffffff;
 }
-
+* {box-sizing:border-box}
 .container
 {
-	background-color: #555555;
-	height: 30px;
-	width: 100px;
+	margin-left: 0px;
+	font-size: 15px;
+	text-align: right;
+	background-color: #ffffff;
+	height: 20px;
+	width: 200px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+hr{
+	width:50%;
 }
