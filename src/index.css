@@ -4,3 +4,10 @@ body{
 	margin: 0px;
 	background-color: #ffffff;
 }
+
+.container
+{
+	background-color: #555555;
+	height: 30px;
+	width: 100px;
+}

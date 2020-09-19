@@ -1,48 +1,7 @@
 import React from 'react'
 import './Home.css'
 
-class PollBox extends React.Component
-{
-	//props: poll_name, poll_desc
-	constructor(props)
-	{
-		super(props);
-	}
-	render()
-	{
-		return(
-			<div className = "pollbox">
-				<div className = "pollbox-head">
-					{this.props.poll_name}
-				</div>
-				
-				<hr />
 
-				<div className = "pollbox-desc">
-					{this.props.poll_desc}
-				</div>
-			</div>
-		)
-	}
-}
-
-class PollBoxes extends React.Component
-{
-	constructor(props)
-	{
-		super(props);
-	}
-	render()
-	{
-		return(
-			<div id = "pollboxes">
-				<PollBox poll_name = "Poll 1" poll_desc = "DESC1" />
-				<PollBox poll_name = "Poll 2" poll_desc = "DESC2" />
-				<PollBox poll_name = "Poll 3" poll_desc = "DESC3" />
-			</div>
-			);
-	}
-}
 
 class UserAuth extends React.Component
 {
@@ -135,17 +94,32 @@ class Body extends React.Component{
 					</div>
 				</div>
 
-				
+				<Bar />
 			</div>
 		);
 	}
+}
+
+class Bar extends React.Component{ 
+	constructor(props)
+	{
+		super(props);
+	}
+	render()
+	{
+		return(
+			<div class = "container">
+			</div>
+		);
+	}
+
 }
 
 class Home extends React.Component
 {
 	constructor(props)
 	{
-		super(props)
+		super(props);
 	}
 	render()
 	{
