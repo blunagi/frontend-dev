@@ -55,7 +55,7 @@ class Home extends React.Component
 		return(
 			<div>
 				<div id = "header">
-					OnlyPolls
+					<img src="/logo.png"></img>
 				</div>
 
 				<Polls />
