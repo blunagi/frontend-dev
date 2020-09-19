@@ -27,7 +27,13 @@
 	justify-content: space-between;
 	flex-wrap: wrap;
 }
-
+.polls {
+	width: 90%;
+	margin: 100px auto 0px auto;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
 
 /*-------------------Body------------------*/
 .webdesc{
@@ -72,10 +78,10 @@
 	margin-bottom: 15px;
 }
 .poll{
-	padding: 8px;
+	padding: 20px;
 	min-height: 256px;
-	width: 256px;
-	border-radius: 10px;
+	width: 30%;
+	border-radius: 20px;
 	border: 1px solid #000000;
 	margin:10px;
 }
@@ -89,7 +95,7 @@
 		flex-direction: column;
 		width: 90%;
 	}
-	.webdesc, .poll-img {
+	.webdesc, .poll-img, .polls {
 		width: 90%;
 		padding: 10px;
 	}
