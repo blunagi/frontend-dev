@@ -9,29 +9,34 @@
 	margin-top: 30px;
 	margin-right: 15px;
 	text-align: right;
+	font-family: "Raleway";
 }
 .user-auth span{
 	cursor:pointer;
 	margin-left: 5px;
 	margin-right: 5px;
 }
+.user-auth input {
+	width: 130px;
+	margin: 5px;
+}
 #top{
 	display: flex;
+	width: 85%;
+	margin: auto;
 	justify-content: space-between;
+	flex-wrap: wrap;
 }
 
 
 /*-------------------Body------------------*/
 .webdesc{
-	margin-top: 150px;
-	margin-left: 100px;
 	width: 40%;
 }
 .down-arrow{
 	font-size: 20px;
 	font-weight: bold;
 	margin-top: 20px;
-	margin-left: 100px;
 	cursor: pointer;
 	transition: font-size 500ms;
 }
@@ -41,15 +46,17 @@
 .da{
 	color: red;
 }
-.poll-img{
-	text-align: right;
-}
-.poll-img img{
-	height: 450px;
-	width:450px;
+.poll-img {
+	width: 50%;
+	height: 50%;
+	max-width: 90%;
 }
 .intro{
+	margin: auto;
+	padding-top: 100px;
+	width: 75%;
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: space-between;
 }
 /*----------------------Poll---------------------*/
@@ -70,10 +77,19 @@
 .poll-head{
 	text-align: center;
 }
-.poll-desc{
-
-}
 hr{
 	text-align: center;
 	width: 50%;
+}
+
+@media only screen and (max-width: 600px) {
+	.intro {
+		flex-direction: column;
+		width: 90%;
+	}
+	.webdesc, .poll-img {
+		width: 90%;
+		padding: 10px;
+	}
+
 }

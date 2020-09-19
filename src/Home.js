@@ -89,9 +89,7 @@ class Body extends React.Component{
 						</div>
 					</div>
 					
-					<div class = "poll-img">
-						<img src="/polls.png"></img>
-					</div>
+					<img class="poll-img" src="/polls.png"></img>
 				</div>
 
 				<Bar />
