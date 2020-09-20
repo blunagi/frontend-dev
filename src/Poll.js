@@ -6,7 +6,7 @@ class Bar extends React.Component{
 	constructor(props)
 	{
 		super(props);
-		console.log(this.props);
+		
 	}
 	render()
 	{
@@ -42,7 +42,7 @@ class Poll extends React.Component
 	{
 		super(props);
 		this.state ={
-			question: "Cats or Dogs?",
+			question: "",
 			desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
 			total: 0,
 			votes: [],
@@ -60,11 +60,8 @@ class Poll extends React.Component
 		let URL = POLL + '/' + this.props.id
 		let that = this
 		fetch(URL)
-		.then(response => response.text())
-		.then(str => console.log(str))
-		/*
 		.then(response => response.json())
-		.then(j => {
+		.then(async function(j){
 			let question = j.text
 			let tempVotes = []
 			let tempChoiceID = []
@@ -79,7 +76,7 @@ class Poll extends React.Component
 				tempChoiceID.push(j.choices[i].id)
 			}
 
-			that.setState({
+			await that.setState({
 				question: question,
 				total: total,
 				votes: tempVotes,
@@ -89,15 +86,15 @@ class Poll extends React.Component
 			
 			for(let i = 0; i < j.choices.length;i++)
 			{
+				console.log("total: " +total);
+				console.log("x: " + tempVotes[i]);
 				tempPercent.push((100 * tempVotes[i]/total).toFixed(2))
 			}
-
 			that.setState({
 				percent: tempPercent
 			})
 
 		})
-		*/
 	}
 	printVoteList()
 	{
@@ -133,22 +130,19 @@ class Poll extends React.Component
 			choice:this.state.choice_id[index]
 		}
 		let that = this;
-		console.log(data);
-		fetch(VOTE, {
+		let response = await fetch(VOTE, {
   			method: 'POST', // or 'PUT'
   			headers: {
     			'Content-Type': 'application/json',
   			},
+  			credentials:"include",
   			body: JSON.stringify(data),
 		})
-		.then(response => response.text())
-		.then(str => console.log(str));
-		/*
-		.then(response => response.json())
-		.then(j => {
-			that.initState()
-		});
-		*/
+		this.initState();
+		this.setState({
+			hasVoted: true
+		})
+		
 
 	}
 	printVotedList()

@@ -40,19 +40,17 @@ class Polls extends React.Component{
 		}
 		let that = this;
 		fetch(POLLS)
-		.then(response => response.text())
-		.then(j => console.log(j));
-		/*
 		.then(response => response.json())
 		.then(j => {
-			tempid = [];
+			let tempid = [];
 			for(var i = 0; i < j.length; i++)
 			{
-				tempid.append j[i].id
+				tempid.push(j[i].id)
 			}
-			that.setState(IDs: tempid)
+			that.setState({
+				IDs: tempid
+			})
 		});
-		*/
 	}
 
 	printPolls()
@@ -65,6 +63,7 @@ class Polls extends React.Component{
 	render()
 	{
 		return(
+
 			<div class = "polls">
 			{this.printPolls()}
 			</div>
