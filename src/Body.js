@@ -75,7 +75,7 @@ class Body extends React.Component
 				});
 			}
 			else {
-				swal(str, "", "error");
+				swal("Not logged in!", "", "error");
 			}
 		})
 	}
@@ -123,9 +123,6 @@ class Body extends React.Component
 				<div class = "intro">
 					<div class = "webdesc">
 							Polls are a fun way to collect and discuss opinions.  OnlyPolls puts polls at its core, letting you create polls, answer existing ones, and discuss in the comments.  It's simple and effective.
-						<div class = "down-arrow">
-							<span class = "da">&darr;</span> View Polls
-						</div>
 					</div>
 					
 					<img class="poll-img" src="/polls.png" alt="example poll"></img>
