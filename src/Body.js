@@ -2,7 +2,7 @@ import React from 'react'
 import swal from 'sweetalert';
 import Poll from './Poll.js'
 
-const BASE_API = "http://148.251.121.245:60343"
+const BASE_API = "https://e13241ae3958.ngrok.io"
 
 const POLL = BASE_API + '/api/poll'
 const POLLS = POLL + 's'
@@ -57,20 +57,26 @@ class Body extends React.Component
 		})
 		.then(response => response.text())
 		.then(str => {
-			swal(str, "", "success");
-			let that = this;
-			fetch(POLLS)
-			.then(response => response.json())
-			.then(j => {
-				let tempid = [];
-				for(var i = 0; i < j.length; i++)
-				{
-					tempid.push(j[i].id)
-				}
-				that.setState({
-					IDs: tempid
-				})
-		});
+			if (str.includes("unathorized"))
+			{
+				swal(str, "", "success");
+				let that = this;
+				fetch(POLLS)
+				.then(response => response.json())
+				.then(j => {
+					let tempid = [];
+					for(var i = 0; i < j.length; i++)
+					{
+						tempid.push(j[i].id)
+					}
+					that.setState({
+						IDs: tempid
+					})
+				});
+			}
+			else {
+				swal("Not logged in", "", "error");
+			}
 		})
 	}
 	handleQuestion(event)

@@ -1,6 +1,6 @@
 import React from 'react';
 import swal from 'sweetalert';
-const BASE_API = "http://148.251.121.245:60343"
+const BASE_API = "https://e13241ae3958.ngrok.io"
 const USER = BASE_API + '/api/user'
 const LOGIN = BASE_API + '/api/login'
 class Top extends React.Component
@@ -46,6 +46,16 @@ class Top extends React.Component
 
 		}
 	}
+}
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+function logged_in() {
+	console.log(getCookie("session"));
+	return getCookie("session") !== "" && getCookie("session") != undefined;
 }
 class UserAuth extends React.Component
 {
@@ -131,29 +141,35 @@ class UserAuth extends React.Component
 	}
 	render()
 	{
-		return(
-			<div class = "user-auth">
-				<input
-				placeholder = "Username"
-				type = "text"
-				value = {this.state.user}
-				onChange = {this.handleUser}/>
-				
-				<input
-				placeholder = "Password"
-				type = "password"
-				value = {this.state.pw}
-				onChange = {this.handlePw}/>
-				
-				<span class = "login" onClick ={this.handleLogin}>
-				Login
-				</span>
+		if (logged_in())
+		{
+			return(null);
+		}
+		else {
+			return(
+				<div class = "user-auth">
+					<input
+					placeholder = "Username"
+					type = "text"
+					value = {this.state.user}
+					onChange = {this.handleUser}/>
+					
+					<input
+					placeholder = "Password"
+					type = "password"
+					value = {this.state.pw}
+					onChange = {this.handlePw}/>
+					
+					<span class = "login" onClick ={this.handleLogin}>
+					Login
+					</span>
 
-				<span class = "sign" onClick = {this.handleSign}>
-				Sign-up
-				</span>
-			</div>
-			);
+					<span class = "sign" onClick = {this.handleSign}>
+					Sign-up
+					</span>
+				</div>
+				);
+		}
 	}
 }
 

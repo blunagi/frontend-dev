@@ -1,5 +1,5 @@
 import React from 'react'
-const BASE_API = "http://148.251.121.245:60343"
+const BASE_API = "https://e13241ae3958.ngrok.io"
 const VOTE = BASE_API + '/api/vote'
 const POLL = BASE_API + '/api/poll'
 class Bar extends React.Component{ 
