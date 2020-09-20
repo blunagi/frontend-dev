@@ -20,10 +20,14 @@ class Body extends React.Component{
 					
 					<img class="poll-img" src="/polls.png"></img>
 				</div>
+			
+				<div class="polls">
+					<Poll />
+					<Poll />		
+					<Poll />		
+					<Poll />		
 
-			<Poll />
-
-
+				</div>
 			</div>
 		);
 	}
@@ -71,7 +75,7 @@ class Poll extends React.Component
 		this.state ={
 			question: "Cats or Dogs?",
 			desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-			id: "ID",
+			id: 1,
 			total: 5,
 			votes: [2,3],
 			names: ["Woof!", "Nya?"],
