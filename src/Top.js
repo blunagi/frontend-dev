@@ -48,9 +48,10 @@ class Top extends React.Component
 	}
 }
 async function logged_in() {
-	let request = await fetch("/api/user", {
+	let request = await fetch(BASE_API + "api/user", {
 		method: "GET"
 	});
+	console.log(request.ok);
 	return request.ok;
 }
 class UserAuth extends React.Component
