@@ -29,7 +29,7 @@
 }
 .polls {
 	width: 90%;
-	margin: 100px auto 0px auto;
+	margin: 50px auto 0px auto;
 	display: flex;
 	justify-content: center;
 	flex-wrap: wrap;
@@ -93,9 +93,11 @@
 }
 
 .add-poll{
-	width:30%;
 	border: 1px solid black;
+	width: 25%;
 	border-radius: 20px;
+	margin: auto;
+	text-align: center;
 }
 .add-choice, .del-choice{
 	cursor: pointer;

@@ -175,7 +175,7 @@ class AddPoll extends React.Component{
 	{
 		const val = this.props.choices.map((ch,index) =>
 			<div style = {{"margin":"10px"}}>
-				{"Choice " + (index+1)}
+				<p>{"Choice " + (index+1)}</p>
 				<input
 				type = "text"
 				placeholder = {"Choice " + (index+1)}
@@ -190,7 +190,7 @@ class AddPoll extends React.Component{
 		return(
 			<div class = "add-poll">
 				<div style = {{"margin":"10px"}}>
-				Question
+					<p>Question</p>
 				<input 
 				type = "text" 
 				placeholder = "Question" 
