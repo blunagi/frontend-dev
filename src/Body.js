@@ -57,7 +57,7 @@ class Body extends React.Component
 		})
 		.then(response => response.text())
 		.then(str => {
-			if (str.includes("unauthorized"))
+			if (!str.includes("unauthorized"))
 			{
 				swal(str, "", "success");
 				let that = this;
@@ -75,7 +75,7 @@ class Body extends React.Component
 				});
 			}
 			else {
-				swal("Not logged in", "", "error");
+				swal(str, "", "error");
 			}
 		})
 	}
