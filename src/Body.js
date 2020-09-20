@@ -2,7 +2,7 @@ import React from 'react'
 import swal from 'sweetalert';
 import Poll from './Poll.js'
 
-const BASE_API = "https://e13241ae3958.ngrok.io"
+const BASE_API = "https://onlypolls.nilsand.re:60343/"
 
 const POLL = BASE_API + '/api/poll'
 const POLLS = POLL + 's'

@@ -1,6 +1,6 @@
 import React from 'react';
 import swal from 'sweetalert';
-const BASE_API = "https://e13241ae3958.ngrok.io"
+const BASE_API = "https://onlypolls.nilsand.re:60343/"
 const USER = BASE_API + '/api/user'
 const LOGIN = BASE_API + '/api/login'
 class Top extends React.Component
