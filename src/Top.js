@@ -11,7 +11,7 @@ class Top extends React.Component
 		return(
 		<div id = "top">
 			<div id = "header">
-				<img src="/logo.png"></img>
+				<img alt="logo" src="/logo.png"></img>
 			</div>
 			<UserAuth />
 		</div>);

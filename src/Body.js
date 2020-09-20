@@ -20,7 +20,7 @@ class Body extends React.Component{
 						</div>
 					</div>
 					
-					<img class="poll-img" src="/polls.png"></img>
+					<img class="poll-img" src="/polls.png" alt="example poll"></img>
 				</div>
 				<AddPoll />
 				
