@@ -85,11 +85,34 @@
 	border: 1px solid #000000;
 	margin:10px;
 }
+
+
 .option{
 	margin-top: 10px;
 	text-align: left;
 }
 
+.add-poll{
+	width:30%;
+	border: 1px solid black;
+	border-radius: 20px;
+}
+.add-choice, .del-choice{
+	cursor: pointer;
+	margin:8px;
+	font-weight: bold;
+	font-family: "Raleway";
+	text-align: center;
+}
+.sub-choice{
+	margin-top: 10px;
+	cursor: pointer;
+	margin:8px;
+	font-weight: bold;
+	font-family: "Raleway";
+	text-align: center;
+	
+}
 @media only screen and (max-width: 600px) {
 	.intro {
 		flex-direction: column;

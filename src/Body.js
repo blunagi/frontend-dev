@@ -1,6 +1,7 @@
 import React from 'react'
-
-
+const BASE_API = "http://148.251.121.245:60343"
+const VOTE = BASE_API + '/api/vote'
+const POLL = BASE_API + '/api/poll'
 class Body extends React.Component{
 	render()
 	{
@@ -20,16 +21,125 @@ class Body extends React.Component{
 					
 					<img class="poll-img" src="/polls.png"></img>
 				</div>
-			
+				<AddPoll />
 				<div class="polls">
 					<Poll />
-					<Poll />		
-					<Poll />		
-					<Poll />		
-
 				</div>
 			</div>
 		);
+	}
+}
+
+class AddPoll extends React.Component{
+	constructor(props)
+	{
+		super(props);
+		this.state = {
+			question: '',
+			choices:['','']
+		};
+		this.handleQuestion = this.handleQuestion.bind(this);
+		this.handleChoice = this.handleChoice.bind(this);
+		this.onAdd = this.onAdd.bind(this);
+		this.onDel = this.onDel.bind(this);
+		this.onSubmit = this.onSubmit.bind(this);
+	}
+	handleQuestion(event)
+	{
+		this.setState({
+			question: event.target.value
+		});
+	}
+	handleChoice(index,event)
+	{
+		let tempChoices = this.state.choices;
+		tempChoices[index] = event.target.value;
+		this.setState({
+			choices: tempChoices
+		})
+	}
+	async onSubmit(event)
+	{
+		console.log("submitted")
+		let data = {
+			text: this.state.question,
+			multiple_answers: false,
+			choices: this.state.choices
+		};
+		
+		fetch(POLL, {
+  			method: 'POST', // or 'PUT'
+  			headers: {
+    			'Content-Type': 'application/json',
+  			},
+  			body: JSON.stringify(data),
+		})
+		.then(response => response.text())
+		.then(str => {console.log(str)})
+
+	}
+	onAdd(event)
+	{
+		if(this.state.choices.length <10)
+		{
+			let tempChoices = this.state.choices;
+			tempChoices.push('');
+			this.setState({
+				choices: tempChoices
+			})
+		}
+	}
+	onDel(event)
+	{
+		if(this.state.choices.length>2)
+		{
+			let tempChoices = this.state.choices;
+			tempChoices.pop()
+			this.setState({
+				choices: tempChoices
+			})
+		} 
+	}
+	printChoiceBoxes()
+	{
+		const val = this.state.choices.map((ch,index) =>
+			<div style = {{"margin":"10px"}}>
+				{"Choice " + (index+1)}
+				<input
+				type = "text"
+				placeholder = {"Choice " + (index+1)}
+				value = {this.state.choices[index]}
+				onChange = {(e) => this.handleChoice(index,e)}/>
+			</div>
+			)
+		return <div>{val}</div>
+	}
+	render()
+	{
+		return(
+			<div class = "add-poll">
+				<div style = {{"margin":"10px"}}>
+				Question
+				<input 
+				type = "text" 
+				placeholder = "Question" 
+				value = {this.state.question}
+				onChange = {this.handleQuestion} />
+				</div>
+				{this.printChoiceBoxes()}
+
+				<div class = "add-choice" onClick = {this.onAdd}>
+				Add Choice
+				</div>
+				<div class = "del-choice" onClick = {this.onDel}>
+				Delete Choice
+				</div>
+
+				<div class = "sub-choice" onClick = {this.onSubmit}>
+				Submit
+				</div>
+			</div>
+			);
 	}
 }
 
@@ -110,7 +220,7 @@ class Poll extends React.Component
 	}
 	async handleVote(index,e)
 	{
-		let newVotes = this.state.votes;
+		/*let newVotes = this.state.votes;
 		newVotes[index]++;
 		await this.setState({
 			total: this.state.total+1
@@ -125,7 +235,20 @@ class Poll extends React.Component
 			hasVoted:true,
 			percent: newPercent,
 			votes:newVotes
+		})*/
+		let data = {
+			choice:index
+		}
+		console.log(data);
+		let response = await fetch(VOTE, {
+  			method: 'POST', // or 'PUT'
+  			headers: {
+    			'Content-Type': 'application/json',
+  			},
+  			body: JSON.stringify(data),
 		})
+		console.log(response.text());
+
 	}
 	printVotedList()
 	{

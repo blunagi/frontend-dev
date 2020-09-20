@@ -1,7 +1,7 @@
 import React from 'react'
 const BASE_API = "http://148.251.121.245:60343"
 const USER = BASE_API + '/api/user'
-const LOGIN = BASE_API + '/login'
+const LOGIN = BASE_API + '/api/login'
 
 class Top extends React.Component
 {
@@ -54,22 +54,37 @@ class UserAuth extends React.Component
 		}
 		console.log(data);
 
-		let response = await fetch(USER, {
+		fetch(USER, {
   			method: 'POST', // or 'PUT'
   			headers: {
     			'Content-Type': 'application/json',
   			},
   			body: JSON.stringify(data),
 		})
-		
-
-		console.log(response.text());
+		.then(response => response.text())
+		.then(str => console.log(str))
   		
 
 	}
-	handleLogin(event)
+	async handleLogin(event)
 	{
 		console.log("login");
+		let data = {
+			"username": this.state.user,
+			"password": this.state.pw,
+			"remember": false
+		}
+		console.log(data);
+
+		fetch(LOGIN, {
+  			method: 'POST', // or 'PUT'
+  			headers: {
+    			'Content-Type': 'application/json',
+  			},
+  			body: JSON.stringify(data),
+		})
+		.then(response => response.text())
+		.then(str => console.log(str))
 	}
 	render()
 	{
