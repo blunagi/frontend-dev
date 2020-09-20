@@ -57,7 +57,7 @@ class Body extends React.Component
 		})
 		.then(response => response.text())
 		.then(str => {
-			if (str.includes("unathorized"))
+			if (str.includes("unauthorized"))
 			{
 				swal(str, "", "success");
 				let that = this;
