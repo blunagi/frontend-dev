@@ -51,7 +51,6 @@ async function logged_in() {
 	let request = await fetch(BASE_API + "api/user", {
 		method: "GET"
 	});
-	console.log(request.ok);
 	return request.ok;
 }
 class UserAuth extends React.Component
@@ -138,8 +137,10 @@ class UserAuth extends React.Component
 	}
 	render()
 	{
-		if (logged_in())
-		{
+		let request = await fetch(BASE_API + "api/user", {
+			method: "GET"
+		});
+		if (request.ok) {
 			return(null);
 		}
 		else {
