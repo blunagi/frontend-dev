@@ -1,6 +1,6 @@
 import React from 'react'
 import Poll from './Poll.js'
-const BASE_API = "http://148.251.121.245:60343"
+const BASE_API = "http://148121.245:60343"
 const POLL = BASE_API + '/api/poll'
 const POLLS = POLL + 's'
 class Body extends React.Component{
@@ -115,8 +115,8 @@ class AddPoll extends React.Component{
   			method: 'POST', // or 'PUT'
   			headers: new Headers({
     			'Content-Type': 'application/json',
-    			'Authenticate': 'Basic a:b'
   			}),
+			credentials: "include",
   			body: JSON.stringify(data),
 		})
 		.then(response => response.text())
