@@ -47,12 +47,6 @@ class Top extends React.Component
 		}
 	}
 }
-async function logged_in() {
-	let request = await fetch(BASE_API + "api/user", {
-		method: "GET"
-	});
-	return request.ok;
-}
 class UserAuth extends React.Component
 {
 	constructor(props)
@@ -137,13 +131,6 @@ class UserAuth extends React.Component
 	}
 	render()
 	{
-		let request = await fetch(BASE_API + "api/user", {
-			method: "GET"
-		});
-		if (request.ok) {
-			return(null);
-		}
-		else {
 			return(
 				<div class = "user-auth">
 					<input
@@ -167,7 +154,6 @@ class UserAuth extends React.Component
 					</span>
 				</div>
 				);
-		}
 	}
 }
 
