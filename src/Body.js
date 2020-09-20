@@ -2,6 +2,7 @@ import React from 'react'
 import Poll from './Poll.js'
 const BASE_API = "http://148.251.121.245:60343"
 const POLL = BASE_API + '/api/poll'
+const POLLS = POLL + 's'
 class Body extends React.Component{
 	render()
 	{
@@ -22,13 +23,56 @@ class Body extends React.Component{
 					<img class="poll-img" src="/polls.png"></img>
 				</div>
 				<AddPoll />
-				<div class="polls">
-					<Poll />
-				</div>
+				
+				<Polls />
 			</div>
 		);
 	}
 }
+
+
+class Polls extends React.Component{
+	constructor(props)
+	{
+		super(props);
+		this.state = {
+			IDs: []
+		}
+		let that = this;
+		fetch(POLLS)
+		.then(response => response.text())
+		.then(j => console.log(j));
+		/*
+		.then(response => response.json())
+		.then(j => {
+			tempid = [];
+			for(var i = 0; i < j.length; i++)
+			{
+				tempid.append j[i].id
+			}
+			that.setState(IDs: tempid)
+		});
+		*/
+	}
+
+	printPolls()
+	{
+		let lp = this.state.IDs.map((id) =>
+			<Poll id = {id} />
+		)
+		return lp
+	}
+	render()
+	{
+		return(
+			<div class = "polls">
+			{this.printPolls()}
+			</div>
+		);
+	}
+
+}
+
 
 class AddPoll extends React.Component{
 	constructor(props)

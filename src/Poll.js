@@ -1,7 +1,7 @@
 import React from 'react'
 const BASE_API = "http://148.251.121.245:60343"
 const VOTE = BASE_API + '/api/vote'
-
+const POLL = BASE_API + '/api/poll'
 class Bar extends React.Component{ 
 	constructor(props)
 	{
@@ -44,10 +44,9 @@ class Poll extends React.Component
 		this.state ={
 			question: "Cats or Dogs?",
 			desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-			id: 1,
-			total: 5,
-			votes: [2,3],
-			names: ["Woof!", "Nya?"],
+			total: 0,
+			votes: [],
+			names: [],
 			percent: [],
 			hasVoted:false
 		}
@@ -65,6 +64,30 @@ class Poll extends React.Component
 		this.handleVote = this.handleVote.bind(this);
 	}
 
+	initState()
+	{
+		let URL = POLL + '/' + this.props.id
+		fetch(URL)
+		.then(response => response.text())
+		.then(str => console.log(str))
+		/*
+		.then(response => response.json())
+		.then(j => {
+			let question = j.text
+			let tempVotes = []
+			let tempChoiceID = []
+			let tempChoice = []
+			let tempPercent = []
+			let total = 0;
+			for(let i = 0; i < j.choices.length;i++)
+			{
+				total += j.choices[i].numVotes
+				tempVotes.push(j.choices[i].numVotes)
+				tempChoice
+			}
+		})
+		*/
+	}
 	printVoteList()
 	{
 		const pList = this.state.names.map((n,index) =>
@@ -99,14 +122,15 @@ class Poll extends React.Component
 			choice:index
 		}
 		console.log(data);
-		let response = await fetch(VOTE, {
+		fetch(VOTE, {
   			method: 'POST', // or 'PUT'
   			headers: {
     			'Content-Type': 'application/json',
   			},
   			body: JSON.stringify(data),
 		})
-		console.log(response.text());
+		.then(response => response.text())
+		.then(str => console.log(str));
 
 	}
 	printVotedList()
