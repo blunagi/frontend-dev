@@ -1,6 +1,6 @@
 import React from 'react'
 const BASE_API = "http://148.251.121.245:60343"
-const USER = '/api/user'
+const USER = BASE_API + '/api/user'
 const LOGIN = BASE_API + '/login'
 
 class Top extends React.Component
