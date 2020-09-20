@@ -47,15 +47,11 @@ class Top extends React.Component
 		}
 	}
 }
-function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(';').shift();
-}
-
-function logged_in() {
-	console.log(getCookie("session"));
-	return getCookie("session") !== "" && getCookie("session") != undefined;
+async function logged_in() {
+	let request = await fetch("/api/user", {
+		method: "GET"
+	});
+	return request.ok;
 }
 class UserAuth extends React.Component
 {
