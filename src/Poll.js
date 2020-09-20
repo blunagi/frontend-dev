@@ -39,7 +39,6 @@ class Poll extends React.Component
 		super(props);
 		this.state ={
 			question: "",
-			desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
 			total: 0,
 			votes: [],
 			names: [],
@@ -166,10 +165,6 @@ class Poll extends React.Component
 						</div>
 						
 						{this.printVotedList()}
-
-						<div class = "poll-desc">
-							{this.state.desc}
-						</div>
 					</div>
 				);
 			else
@@ -180,10 +175,6 @@ class Poll extends React.Component
 						</div>
 						
 						{this.printVoteList()}
-
-						<div class = "poll-desc">
-							{this.state.desc}
-						</div>
 					</div>
 				);
 	}
