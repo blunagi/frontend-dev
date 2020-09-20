@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
+import swal from 'sweetalert';
 const BASE_API = "http://148.251.121.245:60343"
 const USER = BASE_API + '/api/user'
 const LOGIN = BASE_API + '/api/login'
-
 class Top extends React.Component
 {
 	constructor(props)
@@ -39,7 +39,7 @@ class Top extends React.Component
 						<img alt="logo" src="/logo.png"></img>
 					</div>
 					<div>
-						Hello, {this.state.displayUser}
+						<p>Logged in</p>
 					</div>
 				</div>
 			);
@@ -84,17 +84,20 @@ class UserAuth extends React.Component
 		}
 		console.log(data);
 
-		fetch(USER, {
+		let res = await fetch(USER, {
   			method: 'POST', // or 'PUT'
   			headers: {
     			'Content-Type': 'application/json',
   			},
   			body: JSON.stringify(data),
 		})
-		.then(response => response.text())
-		.then(str => console.log(str))
-  		
-
+		if (res.ok)
+		{
+			swal("Perfect!", "Successfully signed up", "success")
+		}
+		else {
+			swal("Username already exists", "", "error")
+		}
 	}
 	async handleLogin(event)
 	{
@@ -118,7 +121,11 @@ class UserAuth extends React.Component
 		.then(str => {
 			if(str!=="Unauthorized")
 			{
+				swal("Successfully logged in", "", "success");
 				this.props.setDisplay(this.state.user);
+			}
+			else {
+				swal("Unauthorized credentials", "", "error");
 			}
 		})
 	}

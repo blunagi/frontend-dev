@@ -1,4 +1,5 @@
 import React from 'react'
+import swal from 'sweetalert';
 import Poll from './Poll.js'
 
 const BASE_API = "http://148.251.121.245:60343"
@@ -56,6 +57,7 @@ class Body extends React.Component
 		})
 		.then(response => response.text())
 		.then(str => {
+			swal(str, "", "success");
 			let that = this;
 			fetch(POLLS)
 			.then(response => response.json())

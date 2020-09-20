@@ -9,7 +9,8 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-polls": "^1.2.0",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "sweetalert": "^2.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -32,5 +33,4 @@
       "last 1 safari version"
     ]
   }
-  
 }
