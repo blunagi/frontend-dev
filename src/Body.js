@@ -1,43 +1,26 @@
 import React from 'react'
 import Poll from './Poll.js'
+
 const BASE_API = "http://148.251.121.245:60343"
+
 const POLL = BASE_API + '/api/poll'
 const POLLS = POLL + 's'
-class Body extends React.Component{
-	render()
-	{
-		return(
-			<div>
-				<div class = "intro">
-					<div class = "webdesc">
-						Lorem ipsum dolor sit amet, 
-						consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
-						labore et dolore magna aliqua. Ut enim ad minim veniam, 
-						quis nostrud 
-						exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-						<div class = "down-arrow">
-							<span class = "da">&darr;</span> View Polls
-						</div>
-					</div>
-					
-					<img class="poll-img" src="/polls.png"></img>
-				</div>
-				<AddPoll />
-				
-				<Polls />
-			</div>
-		);
-	}
-}
-
-
-class Polls extends React.Component{
+class Body extends React.Component
+{
 	constructor(props)
 	{
-		super(props);
+		super(props)
 		this.state = {
+			question: '',
+			choices:['',''],
 			IDs: []
-		}
+		};
+		this.onSubmit = this.onSubmit.bind(this);
+		this.handleQuestion = this.handleQuestion.bind(this);
+		this.handleChoice = this.handleChoice.bind(this);
+		this.onAdd = this.onAdd.bind(this);
+		this.onDel = this.onDel.bind(this);
+
 		let that = this;
 		fetch(POLLS)
 		.then(response => response.json())
@@ -53,56 +36,9 @@ class Polls extends React.Component{
 		});
 	}
 
-	printPolls()
-	{
-		let lp = this.state.IDs.map((id) =>
-			<Poll id = {id} />
-		)
-		return lp
-	}
-	render()
-	{
-		return(
-
-			<div class = "polls">
-			{this.printPolls()}
-			</div>
-		);
-	}
-
-}
-
-
-class AddPoll extends React.Component{
-	constructor(props)
-	{
-		super(props);
-		this.state = {
-			question: '',
-			choices:['','']
-		};
-		this.handleQuestion = this.handleQuestion.bind(this);
-		this.handleChoice = this.handleChoice.bind(this);
-		this.onAdd = this.onAdd.bind(this);
-		this.onDel = this.onDel.bind(this);
-		this.onSubmit = this.onSubmit.bind(this);
-	}
-	handleQuestion(event)
-	{
-		this.setState({
-			question: event.target.value
-		});
-	}
-	handleChoice(index,event)
-	{
-		let tempChoices = this.state.choices;
-		tempChoices[index] = event.target.value;
-		this.setState({
-			choices: tempChoices
-		})
-	}
 	async onSubmit(event)
 	{
+		
 		console.log("submitted")
 		let data = {
 			text: this.state.question,
@@ -119,9 +55,37 @@ class AddPoll extends React.Component{
   			body: JSON.stringify(data),
 		})
 		.then(response => response.text())
-		.then(str => {console.log(str)})
-
+		.then(str => {
+			let that = this;
+			fetch(POLLS)
+			.then(response => response.json())
+			.then(j => {
+				let tempid = [];
+				for(var i = 0; i < j.length; i++)
+				{
+					tempid.push(j[i].id)
+				}
+				that.setState({
+					IDs: tempid
+				})
+		});
+		})
 	}
+	handleQuestion(event)
+	{
+		this.setState({
+			question: event.target.value
+		});
+	}
+	handleChoice(index,event)
+	{
+		let tempChoices = this.state.choices;
+		tempChoices[index] = event.target.value;
+		this.setState({
+			choices: tempChoices
+		})
+	}
+
 	onAdd(event)
 	{
 		if(this.state.choices.length <10)
@@ -144,16 +108,77 @@ class AddPoll extends React.Component{
 			})
 		} 
 	}
+	render()
+	{
+		return(
+			<div>
+				<div class = "intro">
+					<div class = "webdesc">
+						Lorem ipsum dolor sit amet, 
+						consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
+						labore et dolore magna aliqua. Ut enim ad minim veniam, 
+						quis nostrud 
+						exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+						<div class = "down-arrow">
+							<span class = "da">&darr;</span> View Polls
+						</div>
+					</div>
+					
+					<img class="poll-img" src="/polls.png" alt="example poll"></img>
+				</div>
+				<AddPoll 
+				onSubmit = {this.onSubmit}
+				onAdd = {this.onAdd}
+				onDel = {this.onDel}
+				handleChoice = {this.handleChoice}
+				handleQuestion = {this.handleQuestion}
+				question = {this.state.question}
+				choices = {this.state.choices}
+				/>
+				
+				<Polls 
+				IDs = {this.state.IDs}
+				/>
+			</div>
+		);
+	}
+}
+
+
+class Polls extends React.Component{
+	
+	printPolls()
+	{
+		let lp = this.props.IDs.map((id) =>
+			<Poll id = {id} />
+		)
+		return lp
+	}
+	render()
+	{
+		return(
+			<div class = "polls">
+			{this.printPolls()}
+			</div>
+		);
+	}
+
+}
+
+
+class AddPoll extends React.Component{
+
+	
 	printChoiceBoxes()
 	{
-		const val = this.state.choices.map((ch,index) =>
+		const val = this.props.choices.map((ch,index) =>
 			<div style = {{"margin":"10px"}}>
 				{"Choice " + (index+1)}
 				<input
 				type = "text"
 				placeholder = {"Choice " + (index+1)}
-				value = {this.state.choices[index]}
-				onChange = {(e) => this.handleChoice(index,e)}/>
+				value = {this.props.choices[index]}
+				onChange = {(e) => this.props.handleChoice(index,e)}/>
 			</div>
 			)
 		return <div>{val}</div>
@@ -167,19 +192,19 @@ class AddPoll extends React.Component{
 				<input 
 				type = "text" 
 				placeholder = "Question" 
-				value = {this.state.question}
-				onChange = {this.handleQuestion} />
+				value = {this.props.question}
+				onChange = {this.props.handleQuestion} />
 				</div>
 				{this.printChoiceBoxes()}
 
-				<div class = "add-choice" onClick = {this.onAdd}>
+				<div class = "add-choice" onClick = {this.props.onAdd}>
 				Add Choice
 				</div>
-				<div class = "del-choice" onClick = {this.onDel}>
+				<div class = "del-choice" onClick = {this.props.onDel}>
 				Delete Choice
 				</div>
 
-				<div class = "sub-choice" onClick = {this.onSubmit}>
+				<div class = "sub-choice" onClick = {this.props.onSubmit}>
 				Submit
 				</div>
 			</div>

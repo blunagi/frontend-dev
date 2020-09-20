@@ -5,16 +5,46 @@ const LOGIN = BASE_API + '/api/login'
 
 class Top extends React.Component
 {
-
+	constructor(props)
+	{
+		super(props);
+		this.state ={
+			displayUser: ''
+		}
+		this.setDisplay = this.setDisplay.bind(this);
+	}
+	setDisplay(n)
+	{
+		this.setState({
+			displayUser: n
+		})
+	}
 	render()
 	{
-		return(
-		<div id = "top">
-			<div id = "header">
-				<img src="/logo.png"></img>
-			</div>
-			<UserAuth />
-		</div>);
+		if(this.state.displayUser==='')
+		{
+			return(
+				<div id = "top">
+					<div id = "header">
+						<img alt="logo" src="/logo.png"></img>
+					</div>
+					<UserAuth setDisplay = {this.setDisplay}/>
+				</div>
+			);	
+		}
+		else{
+			return(
+				<div id = "top">
+					<div id = "header">
+						<img alt="logo" src="/logo.png"></img>
+					</div>
+					<div>
+						Hello, {this.state.displayUser}
+					</div>
+				</div>
+			);
+
+		}
 	}
 }
 class UserAuth extends React.Component
@@ -85,7 +115,12 @@ class UserAuth extends React.Component
   			body: JSON.stringify(data),
 		})
 		.then(response => response.text())
-		.then(str => console.log(str))
+		.then(str => {
+			if(str!=="Unauthorized")
+			{
+				this.props.setDisplay(this.state.user);
+			}
+		})
 	}
 	render()
 	{

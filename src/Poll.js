@@ -3,11 +3,7 @@ const BASE_API = "http://148.251.121.245:60343"
 const VOTE = BASE_API + '/api/vote'
 const POLL = BASE_API + '/api/poll'
 class Bar extends React.Component{ 
-	constructor(props)
-	{
-		super(props);
-		
-	}
+	
 	render()
 	{
 		let p = this.props.percent;
@@ -86,8 +82,6 @@ class Poll extends React.Component
 			
 			for(let i = 0; i < j.choices.length;i++)
 			{
-				console.log("total: " +total);
-				console.log("x: " + tempVotes[i]);
 				tempPercent.push((100 * tempVotes[i]/total).toFixed(2))
 			}
 			that.setState({
@@ -129,7 +123,6 @@ class Poll extends React.Component
 		let data = {
 			choice:this.state.choice_id[index]
 		}
-		let that = this;
 		let response = await fetch(VOTE, {
   			method: 'POST', // or 'PUT'
   			headers: {
