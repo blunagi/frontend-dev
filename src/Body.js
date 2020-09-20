@@ -122,11 +122,7 @@ class Body extends React.Component
 			<div>
 				<div class = "intro">
 					<div class = "webdesc">
-						Lorem ipsum dolor sit amet, 
-						consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
-						labore et dolore magna aliqua. Ut enim ad minim veniam, 
-						quis nostrud 
-						exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+							Polls are a fun way to collect and discuss opinions.  OnlyPolls puts polls at its core, letting you create polls, answer existing ones, and discuss in the comments.  It's simple and effective.
 						<div class = "down-arrow">
 							<span class = "da">&darr;</span> View Polls
 						</div>

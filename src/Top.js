@@ -165,7 +165,7 @@ class UserAuth extends React.Component
 					</span>
 
 					<span class = "sign" onClick = {this.handleSign}>
-					Sign-up
+					Signup
 					</span>
 				</div>
 				);
