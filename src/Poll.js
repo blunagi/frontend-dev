@@ -47,26 +47,18 @@ class Poll extends React.Component
 			total: 0,
 			votes: [],
 			names: [],
+			choice_id:[],
 			percent: [],
 			hasVoted:false
 		}
-		let newPercent = new Array(this.state.votes.length);
-		let i = 0;
-		for(;i<this.state.votes.length;i++)
-		{
-			newPercent[i] = this.getPercent(this.state.votes[i]);
-		}
-		console.log(newPercent);
-		this.setState({
-			percent: newPercent
-		});
-
+		this.initState();
 		this.handleVote = this.handleVote.bind(this);
 	}
 
 	initState()
 	{
 		let URL = POLL + '/' + this.props.id
+		let that = this
 		fetch(URL)
 		.then(response => response.text())
 		.then(str => console.log(str))
@@ -83,8 +75,27 @@ class Poll extends React.Component
 			{
 				total += j.choices[i].numVotes
 				tempVotes.push(j.choices[i].numVotes)
-				tempChoice
+				tempChoice.push(j.choices[i].text)
+				tempChoiceID.push(j.choices[i].id)
 			}
+
+			that.setState({
+				question: question,
+				total: total,
+				votes: tempVotes,
+				names: tempChoice,
+				choice_id: tempChoiceID
+			})
+			
+			for(let i = 0; i < j.choices.length;i++)
+			{
+				tempPercent.push((100 * tempVotes[i]/total).toFixed(2))
+			}
+
+			that.setState({
+				percent: tempPercent
+			})
+
 		})
 		*/
 	}
@@ -119,8 +130,9 @@ class Poll extends React.Component
 			votes:newVotes
 		})*/
 		let data = {
-			choice:index
+			choice:this.state.choice_id[index]
 		}
+		let that = this;
 		console.log(data);
 		fetch(VOTE, {
   			method: 'POST', // or 'PUT'
@@ -131,6 +143,12 @@ class Poll extends React.Component
 		})
 		.then(response => response.text())
 		.then(str => console.log(str));
+		/*
+		.then(response => response.json())
+		.then(j => {
+			that.initState()
+		});
+		*/
 
 	}
 	printVotedList()
